@@ -1,15 +1,15 @@
 "use client";
 import AuthHeader from "@/components/layout/AuthLayout/AuthHeader";
-import React, { useState } from "react";
-import AuthInput from "../input";
+import React from "react";
 import Button from "@/components/shared/button";
 import Link from "next/link";
-import { Country } from "../../../../../types/constants";
 import { constants } from "@/constants";
 import Image from "next/image";
+import useOnboarding from "@/hooks/useOnboarding";
 
 const SelectCountry = () => {
-  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+  const { data, updateData } = useOnboarding();
+
   return (
     <>
       <AuthHeader
@@ -22,11 +22,9 @@ const SelectCountry = () => {
         {constants.COUNTRIES.map((country) => (
           <button
             key={country.code}
-            onClick={() => setSelectedCountry(country)}
+            onClick={() => updateData({ country })}
             className={`w-full p-3.5 transition-all duration-300 rounded-[10px] bg-[#FAFAFA] cursor-pointer flex items-center gap-2 border ${
-              selectedCountry === country
-                ? "border-[#C79101]"
-                : "border-[#F0F1F2]"
+              data.country === country ? "border-[#C79101]" : "border-[#F0F1F2]"
             }`}
           >
             <Image
@@ -51,8 +49,9 @@ const SelectCountry = () => {
       <div className="flex flex-col gap-4 max-sm:px-4 w-full flex-1">
         <Button
           title="Next"
-          disabled={!selectedCountry}
+          disabled={!data.country}
           className="max-sm:mt-auto"
+          onClick={() => updateData({ steps: 2 })}
         />
         <p className="text-[#6B7280] text-sm font-medium text-center my-2">
           I have an account!{" "}

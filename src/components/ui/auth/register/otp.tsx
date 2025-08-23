@@ -4,13 +4,15 @@ import React, { useEffect, useState } from "react";
 import Button from "@/components/shared/button";
 import OtpInput from "../otp-input";
 import Image from "next/image";
+import useOnboarding from "@/hooks/useOnboarding";
 
 const KEYPAD_NUMBERS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 
 const RegisterOTP = () => {
+  const { data, updateData } = useOnboarding();
   const [timer, setTimer] = useState(60);
   const [canResend, setCanResend] = useState(false);
-  const [otp, setOtp] = useState("");
+  const otp = data.otp;
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -33,12 +35,12 @@ const RegisterOTP = () => {
 
   const handleKeyPress = (digit: string) => {
     if (otp.length < 6) {
-      setOtp((prev) => prev + digit);
+      updateData({ otp: otp + digit });
     }
   };
 
   const handleBackspace = () => {
-    setOtp((prev) => prev.slice(0, -1));
+    updateData({ otp: otp.slice(0, -1) });
   };
 
   return (
@@ -49,6 +51,7 @@ const RegisterOTP = () => {
         width={18}
         height={12}
         className="absolute -top-6 left-2 sm:left-0 cursor-pointer"
+        onClick={() => updateData({ steps: "create-account" })}
       />
       <AuthHeader
         title="OTP verification"
@@ -56,7 +59,11 @@ const RegisterOTP = () => {
       />
 
       <div className="flex flex-col gap-4 max-sm:px-4 w-full flex-1">
-        <OtpInput onChange={(value) => setOtp(value)} length={6} value={otp} />
+        <OtpInput
+          onChange={(value) => updateData({ otp: value })}
+          length={6}
+          value={otp}
+        />
         {canResend ? (
           <button
             onClick={handleResend}
@@ -78,7 +85,7 @@ const RegisterOTP = () => {
             onClick={async () => {
               const text = await navigator.clipboard.readText();
               if (text.length === 6 && !isNaN(Number(text))) {
-                setOtp(text);
+                updateData({ otp: text });
               }
             }}
             className="flex items-center gap-1 bg-[#FAFAFA] p-2 rounded-[10px] border border-[#F0F1F2] cursor-pointer text-xs font-medium text-[#6B7280]"
@@ -89,7 +96,7 @@ const RegisterOTP = () => {
               width={14}
               height={14}
               className="w-3.5 aspect-square"
-            />{" "}
+            />
             Paste OTP
           </button>
           <div className="grid grid-cols-3 gap-3 max-w-xs mx-auto w-full">
@@ -117,7 +124,7 @@ const RegisterOTP = () => {
                 if (otp.length !== 6) {
                   handleBackspace();
                 } else {
-                  handleResend();
+                  updateData({ steps: 1 });
                 }
               }}
               className={`transition-all duration-300 max-w-[70px] w-full aspect-square rounded-full border border-[#F0F1F2] flex items-center justify-center ${
@@ -149,6 +156,7 @@ const RegisterOTP = () => {
           title="Proceed"
           disabled={otp.length !== 6}
           className="max-sm:mt-auto max-sm:hidden"
+          onClick={() => updateData({ steps: 1 })}
         />
       </div>
     </div>

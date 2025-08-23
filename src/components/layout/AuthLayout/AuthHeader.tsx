@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthHeaderProps } from "../../../../types/components/auth";
+import { AuthHeaderProps } from "../../../types/components/auth";
 
 const AuthHeader = ({ title, text, extra }: AuthHeaderProps) => {
   const handleText = (text: string) => {

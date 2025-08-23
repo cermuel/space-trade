@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import localFont from "next/font/local";
 import "./globals.css";
+import AppProvider from "@/providers/AppProvider";
 
 export const metadata: Metadata = {
   title: "SpaceTrade",
@@ -22,7 +21,9 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={` antialiased`}>{children}</body>
+      <body className={`antialiased`}>
+        <AppProvider>{children}</AppProvider>
+      </body>
     </html>
   );
 }

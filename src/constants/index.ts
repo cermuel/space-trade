@@ -1,4 +1,4 @@
-import { Country } from "../../types/constants";
+import { Country } from "../types/constants";
 
 const COUNTRIES: Country[] = [
   {

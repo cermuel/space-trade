@@ -1,17 +1,27 @@
 "use client";
 import AuthHeader from "@/components/layout/AuthLayout/AuthHeader";
-import React, { useState } from "react";
+import React from "react";
 import AuthInput from "../input";
 import Button from "@/components/shared/button";
 import { helpers } from "@/utils/helpers";
 import PasswordCheck from "./check";
+import Image from "next/image";
+import useOnboarding from "@/hooks/useOnboarding";
 
 const CreatePassword = () => {
-  const [password, setPassword] = useState("Sa");
-  const checks = helpers.validatePassword(password);
-  console.log({ password });
+  const { data, updateData } = useOnboarding();
+  const checks = helpers.validatePassword(data.password);
+
   return (
-    <>
+    <div className="relative">
+      <Image
+        src={"/icons/arrow-left.svg"}
+        alt="arrow-left icon"
+        width={18}
+        height={12}
+        className="absolute -top-6 sm:-top-2 left-2 sm:left-0 cursor-pointer"
+        onClick={() => updateData({ steps: 2 })}
+      />
       <AuthHeader
         extra="Step 3/3"
         title="Create Password"
@@ -23,11 +33,14 @@ const CreatePassword = () => {
           label="Email"
           placeholder="Spacetrade@mail.com"
           icon="/icons/email.svg"
+          value={data.email}
+          readOnly
         />
         <AuthInput
           label="Password"
           type="password"
-          onChange={(e) => setPassword(e.target.value)}
+          value={data.password}
+          onChange={(e) => updateData({ password: e.target.value })}
           icon="/icons/lock.svg"
         />
         <div className="flex flex-wrap items-center gap-2">
@@ -51,11 +64,18 @@ const CreatePassword = () => {
           type="password"
           placeholder="Type password here"
           icon="/icons/lock.svg"
+          value={data.confirm_password}
+          onChange={(e) => updateData({ confirm_password: e.target.value })}
         />
 
-        <Button title="Next" disabled className="max-sm:mt-auto" />
+        <Button
+          title="Next"
+          disabled={!data.password || data.password !== data.confirm_password}
+          onClick={() => updateData({ steps: "set-pin" })}
+          className="max-sm:mt-auto"
+        />
       </div>
-    </>
+    </div>
   );
 };
 

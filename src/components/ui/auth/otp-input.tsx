@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef } from "react";
-import { OtpInputProps } from "../../../../types/components/auth";
+import { OtpInputProps } from "../../../types/components/auth";
 
 const OtpInput = ({ length = 6, onChange, value = "" }: OtpInputProps) => {
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);

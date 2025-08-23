@@ -1,5 +1,5 @@
 import React from "react";
-import { PasswordCheckProps } from "../../../../../types/components/auth";
+import { PasswordCheckProps } from "../../../../types/components/auth";
 import Image from "next/image";
 
 const PasswordCheck = ({ isValid, text }: PasswordCheckProps) => {

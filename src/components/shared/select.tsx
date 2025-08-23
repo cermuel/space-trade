@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { FormSelectProps } from "../../../types/components/shared";
+import { FormSelectProps } from "../../types/components/shared";
 import { BiChevronDown } from "react-icons/bi";
 
 const FormSelect = ({ label, icon, preseprator, options }: FormSelectProps) => {

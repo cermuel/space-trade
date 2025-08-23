@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { AuthInputProps } from "../../../../types/components/auth";
+import { AuthInputProps } from "../../../types/components/auth";
 import Image from "next/image";
 
 const AuthInput = ({

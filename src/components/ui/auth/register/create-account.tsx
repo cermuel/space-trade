@@ -3,8 +3,10 @@ import React from "react";
 import AuthInput from "../input";
 import Button from "@/components/shared/button";
 import Link from "next/link";
+import useOnboarding from "@/hooks/useOnboarding";
 
 const CreateAccount = () => {
+  const { data, updateData } = useOnboarding();
   return (
     <>
       <AuthHeader
@@ -14,12 +16,19 @@ const CreateAccount = () => {
 
       <div className="flex flex-col gap-4 max-sm:px-4 w-full flex-1">
         <AuthInput
+          value={data.email}
+          onChange={(e) => updateData({ email: e.target.value })}
           label="Email"
           placeholder="E.g xxxx@mail.com"
           icon="/icons/email.svg"
         />
 
-        <Button title="Proceed" disabled className="max-sm:mt-auto" />
+        <Button
+          title="Proceed"
+          disabled={!data.email}
+          className="max-sm:mt-auto"
+          onClick={() => updateData({ steps: "otp" })}
+        />
         <p className="text-[#6B7280] text-sm font-medium text-center my-2">
           I have an account!{" "}
           <Link href={"/"} className="text-[#C79101]">

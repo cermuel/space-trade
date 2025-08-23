@@ -1,23 +1,26 @@
 "use client";
 import AuthHeader from "@/components/layout/AuthLayout/AuthHeader";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Button from "@/components/shared/button";
 import OtpInput from "../otp-input";
 import Image from "next/image";
+import useOnboarding from "@/hooks/useOnboarding";
+import Link from "next/link";
 
 const KEYPAD_NUMBERS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 
 const SetPin = () => {
-  const [pin, setPin] = useState("");
+  const { data, updateData } = useOnboarding();
+  const pin = data.pin;
 
   const handleKeyPress = (digit: string) => {
     if (pin.length < 4) {
-      setPin((prev) => prev + digit);
+      updateData({ pin: pin + digit });
     }
   };
 
   const handleBackspace = () => {
-    setPin((prev) => prev.slice(0, -1));
+    updateData({ pin: pin.slice(0, -1) });
   };
 
   return (
@@ -28,6 +31,7 @@ const SetPin = () => {
         width={18}
         height={12}
         className="absolute -top-6 left-2 sm:left-0 cursor-pointer"
+        onClick={() => updateData({ steps: 3 })}
       />
       <AuthHeader
         title="Set pin"
@@ -37,7 +41,7 @@ const SetPin = () => {
       <div className="flex flex-col gap-4 max-sm:px-4 w-full flex-1">
         <div className="max-w-[250px] w-full self-center">
           <OtpInput
-            onChange={(value) => setPin(value)}
+            onChange={(value) => updateData({ pin: value })}
             length={4}
             value={pin}
           />
@@ -103,9 +107,12 @@ const SetPin = () => {
             disabled={pin.length !== 4}
             className="max-sm:mt-auto max-sm:hidden"
           />
-          <button className="text-sm font-medium text-[#C79101] underline text-center cursor-pointer">
+          <Link
+            href={"/"}
+            className="text-sm font-medium text-[#C79101] underline text-center cursor-pointer"
+          >
             I will do this later! Remind me
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonProps } from "../../../types/components/shared";
+import { ButtonProps } from "../../types/components/shared";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const Button = ({ loading, title, className = "", ...rest }: ButtonProps) => {

@@ -2,7 +2,6 @@ import AuthHeader from "@/components/layout/AuthLayout/AuthHeader";
 import AuthLayout from "@/components/layout/AuthLayout/AuthLayout";
 import Button from "@/components/shared/button";
 import AuthInput from "@/components/ui/auth/input";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Login() {
@@ -34,7 +33,7 @@ export default function Login() {
         </div>
         <Button title="Log in" disabled className="max-sm:mt-auto" />
         <p className="text-[#6B7280] text-sm font-medium text-center">
-          I don't have an account!{" "}
+          I don&apos;t have an account!{" "}
           <Link href={"/register"} className="text-[#C79101]">
             Create Account
           </Link>
