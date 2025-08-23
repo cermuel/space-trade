@@ -8,6 +8,9 @@ const AuthInput = ({
   onChange,
   type: inputType,
   icon,
+  preseprator,
+  extraFunction,
+  functionTitle,
   ...rest
 }: AuthInputProps) => {
   const [type, setType] = useState(inputType);
@@ -24,8 +27,13 @@ const AuthInput = ({
             className="w-4.5 h-4.5"
           />
         )}
+        {preseprator && preseprator}
+        {preseprator && (
+          <div className="h-[18px] w-0 border-[0.5px] border-[#D1D3D8]"></div>
+        )}
         <input
           type={type}
+          onChange={onChange}
           className="flex-1 outline-none autofill:bg-transparent border-0 h-full placeholder:text-[#6B7280] text-xs"
           {...rest}
         />
@@ -41,6 +49,14 @@ const AuthInput = ({
             className="cursor-pointer text-[#6B7280] text-xs font-medium border border-[#F0F1F2] bg-white rounded-sm p-1"
           >
             {type === "password" ? "Show" : "Hide"}
+          </button>
+        )}
+        {extraFunction && functionTitle && (
+          <button
+            onClick={extraFunction}
+            className="cursor-pointer text-[#C79101] text-xs font-medium border border-[#F0F1F2] bg-white rounded-md p-1 px-2"
+          >
+            {functionTitle}
           </button>
         )}
       </div>
