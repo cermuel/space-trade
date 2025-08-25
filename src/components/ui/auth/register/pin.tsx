@@ -6,8 +6,7 @@ import OtpInput from "../otp-input";
 import Image from "next/image";
 import useOnboarding from "@/hooks/useOnboarding";
 import Link from "next/link";
-
-const KEYPAD_NUMBERS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+import { constants } from "@/constants";
 
 const SetPin = () => {
   const { data, updateData } = useOnboarding();
@@ -49,7 +48,7 @@ const SetPin = () => {
 
         <div className="sm:hidden flex flex-col items-center gap-4 mt-6">
           <div className="grid grid-cols-3 gap-3 max-w-xs mx-auto w-full">
-            {KEYPAD_NUMBERS.slice(0, 9).map((num) => (
+            {constants.KEYPAD_NUMBERS.slice(0, 9).map((num) => (
               <button
                 key={num}
                 onClick={() => handleKeyPress(num)}

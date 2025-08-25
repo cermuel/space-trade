@@ -5,8 +5,7 @@ import Button from "@/components/shared/button";
 import OtpInput from "../otp-input";
 import Image from "next/image";
 import useOnboarding from "@/hooks/useOnboarding";
-
-const KEYPAD_NUMBERS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+import { constants } from "@/constants";
 
 const RegisterOTP = () => {
   const { data, updateData } = useOnboarding();
@@ -55,7 +54,7 @@ const RegisterOTP = () => {
       />
       <AuthHeader
         title="OTP verification"
-        text="A 6-digit OTP code was sent to **spacetrade@mail.com**. Input it below to continue"
+        text={`A 6-digit OTP code was sent to **${data.email}.** Input it below to continue`}
       />
 
       <div className="flex flex-col gap-4 max-sm:px-4 w-full flex-1">
@@ -100,7 +99,7 @@ const RegisterOTP = () => {
             Paste OTP
           </button>
           <div className="grid grid-cols-3 gap-3 max-w-xs mx-auto w-full">
-            {KEYPAD_NUMBERS.slice(0, 9).map((num) => (
+            {constants.KEYPAD_NUMBERS.slice(0, 9).map((num) => (
               <button
                 key={num}
                 onClick={() => handleKeyPress(num)}

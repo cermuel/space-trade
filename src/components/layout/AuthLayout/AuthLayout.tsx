@@ -99,7 +99,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
           alt="logo icon"
           className="h-8 w-full sm:hidden"
         />
-        <div className="w-full max-w-[450px] max-sm:flex-1 flex flex-col">
+        <div className="w-full max-w-[450px] max-sm:flex-1 flex flex-col overflow-y-scroll pt-2">
           {children}
         </div>
       </div>

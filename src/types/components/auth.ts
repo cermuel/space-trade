@@ -4,6 +4,7 @@ export interface AuthHeaderProps {
   title: string;
   text: string;
   extra?: string;
+  icon?: string;
 }
 
 export interface AuthInputProps

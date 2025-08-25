@@ -13,4 +13,22 @@ export interface Onboarding {
   password: string;
   confirm_password: string;
   pin: string;
+  auth_id: string;
+}
+
+export interface Login {
+  email: string;
+  password: string;
+  otp: string;
+  steps: "login" | "otp" | "pin";
+  pin?: string;
+  auth_id: string;
+}
+
+export interface ForgotPassword {
+  email: string;
+  otp: string;
+  password: string;
+  confirm_password: string;
+  steps: "forgot-password" | "otp" | "new-password";
 }

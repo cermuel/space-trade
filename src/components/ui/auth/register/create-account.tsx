@@ -4,9 +4,28 @@ import AuthInput from "../input";
 import Button from "@/components/shared/button";
 import Link from "next/link";
 import useOnboarding from "@/hooks/useOnboarding";
+import { useInitiateRegisterMutation } from "@/services/auth/authApiSlice";
+import toast from "react-hot-toast";
+import { helpers } from "@/utils/helpers";
+import { InitiateRegisterError } from "@/types/services/auth";
 
 const CreateAccount = () => {
+  const [initiate, { isLoading }] = useInitiateRegisterMutation();
   const { data, updateData } = useOnboarding();
+
+  const handleRegister = async () => {
+    try {
+      const user = await initiate({
+        email: data.email,
+      }).unwrap();
+      toast.success("Account created successfully!");
+      updateData({ steps: "otp", auth_id: user.id });
+    } catch (error: unknown) {
+      const err = error as InitiateRegisterError;
+      toast.error(err.data.message ?? "Error creating account!");
+    }
+  };
+
   return (
     <>
       <AuthHeader
@@ -25,9 +44,12 @@ const CreateAccount = () => {
 
         <Button
           title="Proceed"
-          disabled={!data.email}
+          disabled={
+            !data.email || isLoading || !helpers.isValidEmail(data.email)
+          }
+          loading={isLoading}
           className="max-sm:mt-auto"
-          onClick={() => updateData({ steps: "otp" })}
+          onClick={handleRegister}
         />
         <p className="text-[#6B7280] text-sm font-medium text-center my-2">
           I have an account!{" "}

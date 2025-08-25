@@ -1,5 +1,5 @@
 "use client";
-import { Onboarding } from "@/types/context/onboarding";
+import { Onboarding } from "@/types/context/auth";
 import React, { ReactNode, useState } from "react";
 
 interface OnboardingContextType {
@@ -24,6 +24,7 @@ const OnboardingContext = ({ children }: { children: ReactNode }) => {
     confirm_password: "",
     pin: "",
     steps: "create-account",
+    auth_id: "",
   });
   const updateData = (fields: Partial<Onboarding>) => {
     setData((prev) => ({ ...prev, ...fields }));

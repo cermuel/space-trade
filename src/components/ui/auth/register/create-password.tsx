@@ -7,11 +7,45 @@ import { helpers } from "@/utils/helpers";
 import PasswordCheck from "./check";
 import Image from "next/image";
 import useOnboarding from "@/hooks/useOnboarding";
+import { useCompleteRegisterMutation } from "@/services/auth/authApiSlice";
+import toast from "react-hot-toast";
+import { InitiateRegisterError } from "@/types/services/auth";
 
 const CreatePassword = () => {
   const { data, updateData } = useOnboarding();
+  const [completeRegistration, { isLoading }] = useCompleteRegisterMutation();
   const checks = helpers.validatePassword(data.password);
 
+  const handleRegister = async () => {
+    try {
+      const {
+        email,
+        auth_id,
+        password,
+        otp,
+        first_name,
+        last_name,
+        phone,
+        username,
+      } = data;
+      const user = await completeRegistration({
+        auth_id,
+        email,
+        otp,
+        first_name,
+        last_name,
+        phone,
+        username,
+        password,
+      }).unwrap();
+      console.log(user);
+      toast.success("Registration completed successfully!");
+      updateData({ steps: "set-pin" });
+    } catch (error: unknown) {
+      const err = error as InitiateRegisterError;
+      toast.error(err.data.message ?? "Error creating account!");
+    }
+  };
   return (
     <div className="relative">
       <Image
@@ -70,8 +104,18 @@ const CreatePassword = () => {
 
         <Button
           title="Next"
-          disabled={!data.password || data.password !== data.confirm_password}
-          onClick={() => updateData({ steps: "set-pin" })}
+          disabled={
+            !checks.uppercase ||
+            !checks.length ||
+            !checks.lowercase ||
+            !checks.number ||
+            !checks.special ||
+            !data.password ||
+            data.password !== data.confirm_password ||
+            isLoading
+          }
+          loading={isLoading}
+          onClick={handleRegister}
           className="max-sm:mt-auto"
         />
       </div>

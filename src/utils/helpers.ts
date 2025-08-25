@@ -16,4 +16,9 @@ const validatePassword = (password: string) => {
   };
 };
 
-export const helpers = { validatePassword };
+export function isValidEmail(email: string): boolean {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email.toLowerCase());
+}
+
+export const helpers = { validatePassword, isValidEmail };

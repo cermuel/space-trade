@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 import { accessToken } from "../auth/loginSlice";
 
-const BASE_URI: string = process.env.NEXT_BASE_URI as string;
+const BASE_URI: string = process.env.NEXT_PUBLIC_BASE_URL as string;
 
 export const apiSlice = createApi({
   reducerPath: "api",
