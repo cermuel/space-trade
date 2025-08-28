@@ -48,3 +48,9 @@ npm install
 ```bash
 npm run dev
 ```
+
+## Notes
+
+- Some staging API endpoints (e.g., login) returned errors during testing, so I was unable to complete full authentication flow.
+- To demonstrate the rest of the app, I used dummy data based on Postman example responses.
+- If the login screen fails, you can manually navigate to `/home` in the browser to view the main application features.
