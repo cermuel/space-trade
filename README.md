@@ -14,13 +14,13 @@ This project is a **Next.js web application** developed as part of the Spacetrad
 
 ├── components/  
 ├── app/  
-├── services/
-├── constants/
-├── context/
-├── hooks/
-├── providers/
-├── utils/
-├── .gitignore
+├── services/  
+├── constants/  
+├── context/  
+├── hooks/  
+├── providers/  
+├── utils/  
+├── .gitignore  
 └── README.md
 
 ## 🛠️ Setup Instructions
@@ -28,8 +28,8 @@ This project is a **Next.js web application** developed as part of the Spacetrad
 1. **Clone the Repository**
 
 ```bash
-git clone https://github.com/cermuel/spacetrade.git
-cd spacetrade
+git clone https://github.com/cermuel/space-trade.git
+cd space-trade
 ```
 
 2. **Install dependencies**
