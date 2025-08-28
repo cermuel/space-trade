@@ -4,6 +4,7 @@ import { IoDocumentText } from "react-icons/io5";
 import { RiDiscountPercentFill } from "react-icons/ri";
 import { FaUser } from "react-icons/fa";
 import { Rate } from "@/types/components/home";
+import { AppInterface } from "@/types/services/app";
 
 const KEYPAD_NUMBERS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 
@@ -710,6 +711,69 @@ const DUMMY_RATES: Rate[] = [
   },
 ];
 
+const DUMMY_APP: AppInterface = {
+  wallet_balance: "0.00",
+  reward_balance: "0.00",
+  promotions: [
+    {
+      id: 1,
+      title: "Refer & Earn",
+      banner_url: "https://getspacetrade.b-cdn.net/banner/refer.png",
+      promotion_url: "refer_page",
+      status: 1,
+      created_at: "2024-10-29T06:17:30.000000Z",
+      updated_at: "2024-10-29T06:17:30.000000Z",
+      deleted_at: null,
+    },
+    {
+      id: 2,
+      title: "Renew your TV subscription",
+      banner_url: "https://getspacetrade.b-cdn.net/banner/cabletv.png",
+      promotion_url: "buy_cable",
+      status: 1,
+      created_at: "2024-10-29T06:17:30.000000Z",
+      updated_at: "2024-10-29T06:17:30.000000Z",
+      deleted_at: null,
+    },
+    {
+      id: 3,
+      title: "Fund your bet wallet",
+      banner_url: "https://getspacetrade.b-cdn.net/banner/bet.png",
+      promotion_url: "bet_page",
+      status: 1,
+      created_at: "2024-10-29T06:17:30.000000Z",
+      updated_at: "2024-10-29T06:17:30.000000Z",
+      deleted_at: null,
+    },
+    {
+      id: 4,
+      title: "Trade giftcards for cash",
+      banner_url: "https://getspacetrade.b-cdn.net/banner/giftcard.png",
+      promotion_url: "sell_giftcard",
+      status: 1,
+      created_at: "2024-10-29T06:17:30.000000Z",
+      updated_at: "2024-10-29T06:17:30.000000Z",
+      deleted_at: null,
+    },
+    {
+      id: 5,
+      title: "How to trade giftcards",
+      banner_url:
+        "https://getspacetrade.b-cdn.net/banner/Spacetrade%20iii%20Banner%20(How%20to%20trade%20Giftcards)%20(1).jpg",
+      promotion_url:
+        "https://getspacetrade.b-cdn.net/video/instruction%20video%20hd.mp4",
+      status: 1,
+      created_at: "2024-10-29T06:17:30.000000Z",
+      updated_at: "2024-10-29T06:17:30.000000Z",
+      deleted_at: null,
+    },
+  ],
+};
+
+const CURRENCIES = [
+  { code: "NGN", name: "Nigerian Naira", flag: "/icons/ng-flag-light.svg" },
+];
+
 export const constants = {
   COUNTRIES,
   REFERALL,
@@ -717,4 +781,6 @@ export const constants = {
   NAV_LINKS,
   ACTIONS,
   DUMMY_RATES,
+  CURRENCIES,
+  DUMMY_APP,
 };

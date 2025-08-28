@@ -1,9 +1,10 @@
 import {
   CompleteLoginPayload,
   CompleteRegisterPayload,
+  CompleteRegisterResponse,
   ForgotPasswordResponse,
+  GetProfileResponse,
   InitiateLoginPayload,
-  InitiateRegisterError,
   InitiateRegisterPayload,
   InitiateRegisterResponse,
   ResetPasswordPayload,
@@ -22,7 +23,10 @@ export const authSlice = apiSlice.injectEndpoints({
         body: user,
       }),
     }),
-    completeRegister: builder.mutation<unknown, CompleteRegisterPayload>({
+    completeRegister: builder.mutation<
+      CompleteRegisterResponse,
+      CompleteRegisterPayload
+    >({
       query: (user) => ({
         url: "/api/auth/register/complete",
         method: "POST",
@@ -62,6 +66,12 @@ export const authSlice = apiSlice.injectEndpoints({
         body: reset,
       }),
     }),
+    getProfile: builder.query<GetProfileResponse, unknown>({
+      query: () => ({
+        url: "/api/auth/me",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -72,4 +82,5 @@ export const {
   useCompleteLoginMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
+  useGetProfileQuery,
 } = authSlice;

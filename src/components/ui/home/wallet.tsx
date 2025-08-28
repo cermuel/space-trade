@@ -1,10 +1,16 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { IoEyeOffOutline } from "react-icons/io5";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import CurrencyDropdown from "./currency-dropdown";
+import { useGetAppQuery } from "@/services/app/appApiSlice";
+import { constants } from "@/constants";
 
 const Wallet = () => {
+  const { data } = useGetAppQuery({});
   const [showBalance, setShowBalance] = useState(true);
+
+  const app = data ?? constants.DUMMY_APP;
   return (
     <div
       className="rounded-[18px] w-full sm:h-[122px] h-20 relative flex items-center justify-between px-5"
@@ -32,12 +38,17 @@ const Wallet = () => {
           className="text-white flex items-center gap-1 font-medium text-[10px] cursor-pointer"
         >
           Wallet Balance:
-          <IoEyeOffOutline size={16} />
+          {showBalance ? (
+            <IoEyeOffOutline size={16} />
+          ) : (
+            <IoEyeOutline size={16} />
+          )}
         </button>
         <h1 className="text-white sm:text-[30px] font-bold">
-          {showBalance ? "₦540,000.00" : "*********"}
+          {showBalance ? `₦${app.wallet_balance}` : "*********"}
         </h1>
       </div>
+      <CurrencyDropdown />
     </div>
   );
 };

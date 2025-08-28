@@ -51,6 +51,12 @@ const loginSlice = createSlice({
       sessionStorage.setItem("spacetrade_user", JSON.stringify(state.user));
     },
 
+    setToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload;
+      state.isAuthenticated = true;
+      sessionStorage.setItem("spacetrade_token", action.payload);
+    },
+
     logoutUser: (state) => {
       state.isAuthenticated = false;
       state.token = null;
@@ -63,7 +69,7 @@ const loginSlice = createSlice({
   },
 });
 
-export const { addUser, logoutUser } = loginSlice.actions;
+export const { addUser, logoutUser, setToken } = loginSlice.actions;
 
 export default loginSlice.reducer;
 

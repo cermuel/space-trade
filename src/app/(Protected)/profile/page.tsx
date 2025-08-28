@@ -2,7 +2,7 @@ import AppLayout from "@/components/layout/AppLayout/AppLayout";
 import NotReady from "@/components/shared/not-ready";
 import React from "react";
 
-const TransactionsPage = () => {
+const ProfilePage = () => {
   return (
     <AppLayout>
       <NotReady />
@@ -10,4 +10,4 @@ const TransactionsPage = () => {
   );
 };
 
-export default TransactionsPage;
+export default ProfilePage;

@@ -8,5 +8,5 @@ export interface FormSelectProps
   label: string;
   icon?: string;
   preseprator?: React.ReactNode;
-  options: { value: string; label: string }[];
+  options: { value: string; label: string; icon?: string }[];
 }

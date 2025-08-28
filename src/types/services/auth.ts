@@ -90,3 +90,7 @@ export interface ResetPasswordPayload {
   otp: string;
   password: string;
 }
+
+export interface GetProfileResponse {
+  user: User;
+}

@@ -10,10 +10,14 @@ import useOnboarding from "@/hooks/useOnboarding";
 import { useCompleteRegisterMutation } from "@/services/auth/authApiSlice";
 import toast from "react-hot-toast";
 import { InitiateRegisterError } from "@/types/services/auth";
+import { useDispatch } from "react-redux";
+import { setToken } from "@/services/auth/loginSlice";
 
 const CreatePassword = () => {
   const { data, updateData } = useOnboarding();
   const [completeRegistration, { isLoading }] = useCompleteRegisterMutation();
+  const dispatch = useDispatch();
+
   const checks = helpers.validatePassword(data.password);
 
   const handleRegister = async () => {
@@ -38,7 +42,8 @@ const CreatePassword = () => {
         username,
         password,
       }).unwrap();
-      console.log(user);
+
+      dispatch(setToken(user.token));
       toast.success("Registration completed successfully!");
       updateData({ steps: "set-pin" });
     } catch (error: unknown) {

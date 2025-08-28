@@ -36,6 +36,15 @@ const FormSelect = ({ label, icon, preseprator, options }: FormSelectProps) => {
           <div className="h-[18px] w-0 border-[0.5px] border-[#D1D3D8]"></div>
         )}
 
+        {selected.icon && (
+          <Image
+            src={selected.icon}
+            alt="select icon"
+            width={18}
+            height={18}
+            className="w-4.5 h-4.5"
+          />
+        )}
         <span className="flex-1 text-xs text-[#111]">{selected.label}</span>
         <BiChevronDown
           className={`w-4 h-4 text-[#6B7280] transition-transform ${
@@ -50,10 +59,19 @@ const FormSelect = ({ label, icon, preseprator, options }: FormSelectProps) => {
             <li
               key={i}
               onClick={() => handleSelect(opt)}
-              className={`p-4 text-xs cursor-pointer hover:bg-[#F9FAFB] ${
+              className={`p-4 text-xs cursor-pointer hover:bg-[#F9FAFB] flex items-center gap-1 ${
                 selected.value === opt.value ? "bg-[#F3F4F6]" : ""
               }`}
             >
+              {opt.icon && (
+                <Image
+                  src={opt.icon}
+                  alt="select icon"
+                  width={18}
+                  height={18}
+                  className="w-4.5 h-4.5"
+                />
+              )}
               {opt.label}
             </li>
           ))}

@@ -4,7 +4,6 @@ import React from "react";
 import Button from "@/components/shared/button";
 import OtpInput from "../otp-input";
 import Image from "next/image";
-import useOnboarding from "@/hooks/useOnboarding";
 import Link from "next/link";
 import { constants } from "@/constants";
 import useLogin from "@/hooks/useLogin";

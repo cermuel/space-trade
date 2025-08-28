@@ -19,14 +19,14 @@ interface Network {
   id: number;
   obiex_crypto_id: number;
   addressRegex: string;
-  memoRegex: any;
+  memoRegex: unknown;
   name: string;
   code: string;
   fee: string;
   feeType: string;
   minimum: string;
-  contractAddress: any | string;
-  explorerLink: any;
+  contractAddress: unknown | string;
+  explorerLink: unknown;
   created_at: string;
   updated_at: string;
 }

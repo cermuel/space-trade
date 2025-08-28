@@ -2,8 +2,12 @@
 import { constants } from "@/constants";
 import React, { useEffect, useRef, useState } from "react";
 import Rate from "./rate";
+import { useGetCryptoCurrenciesQuery } from "@/services/app/appApiSlice";
+import Skeleton from "@/components/shared/skeleton-loader";
+import RateLoader from "./rate-loader";
 
 const RateSection = () => {
+  const { data, isLoading } = useGetCryptoCurrenciesQuery({});
   const [rates, setRates] = useState(constants.DUMMY_RATES);
   const listRef = useRef<HTMLUListElement>(null);
 
@@ -30,17 +34,26 @@ const RateSection = () => {
     return () => clearInterval(interval);
   }, []);
 
+  if (data) {
+    setRates(data);
+  }
+
   return (
     <section className="my-5">
       <h2 className="text-xs font-medium">Rates:</h2>
-      <ul
-        ref={listRef}
-        className="flex overflow-x-scroll gap-5 items-center scroll-smooth no-scrollbar mt-2"
-      >
-        {rates.map((rate) => (
-          <Rate rate={rate} key={rate.id} />
-        ))}
-      </ul>
+
+      {isLoading ? (
+        <RateLoader />
+      ) : (
+        <ul
+          ref={listRef}
+          className="flex overflow-x-scroll gap-5 items-center scroll-smooth no-scrollbar mt-2"
+        >
+          {rates.map((rate) => (
+            <Rate rate={rate} key={rate.id} />
+          ))}
+        </ul>
+      )}
     </section>
   );
 };
