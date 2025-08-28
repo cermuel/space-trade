@@ -3,7 +3,6 @@ import { constants } from "@/constants";
 import React, { useEffect, useRef, useState } from "react";
 import Rate from "./rate";
 import { useGetCryptoCurrenciesQuery } from "@/services/app/appApiSlice";
-import Skeleton from "@/components/shared/skeleton-loader";
 import RateLoader from "./rate-loader";
 
 const RateSection = () => {
